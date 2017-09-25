@@ -1,0 +1,32 @@
+Spring mvc框架是一个MVC框架，通过实现MVC很好的将数据、业务、展现进行分离
+spring mvc的设计围绕DispatcherServlet展开的，由DispatcherServlet负责将请求派发到特定的handler，
+
+
+spring mvc框架搭建步骤
+1、创建工程，拷贝springmvc相关的jar包，并把jar包拷贝到lib
+2、配置web.xml,配置前端控制器DispatcherServlet
+  <servlet>
+  	<servlet-name>springmvc</servlet-name>
+  	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>springmvc</servlet-name>
+  	<url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+3、在web-info下创建spring的mvc的配置文件，[servletname]-servlet.xml
+   文件名必须为springmvc-servlet.xml
+4、配置HandlerMapping 根據beanname找到對應的controller （可以省略）
+	<bean class="org.springframework.web.servlet.mvc.support.ControllerBeanNameHandlerMapping"></bean>
+5、創建jsp頁面，需要發出請求的頁面
+6、創建controller 繼承AbastractController重寫handleRequestInternal
+   		//返回數據和頁面
+   		ModelAndView mav = new ModelAndView("index");
+		mav.addObject("helloworld", "hello " +hello);
+7、配置視圖解析器
+    <!-- 配置視圖解析器 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceView">
+    	<!-- 前綴 -->
+    	<property name="" value="/view/"></property>
+    	<!-- 後綴 -->
+    	<property name="suffix" value=".jsp"></property>
